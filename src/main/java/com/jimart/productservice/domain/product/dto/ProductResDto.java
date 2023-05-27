@@ -2,7 +2,6 @@ package com.jimart.productservice.domain.product.dto;
 
 import com.jimart.productservice.domain.product.constant.ProductStatus;
 import com.jimart.productservice.domain.product.entity.Product;
-import com.jimart.productservice.domain.stock.Stock;
 import lombok.Builder;
 import lombok.Getter;
 

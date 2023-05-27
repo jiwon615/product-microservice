@@ -1,7 +1,7 @@
 package com.jimart.productservice.core.common;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.jimart.userservice.core.exception.ErrorMsgType;
+import com.jimart.productservice.core.exception.ErrorMsgType;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.http.HttpStatus;
