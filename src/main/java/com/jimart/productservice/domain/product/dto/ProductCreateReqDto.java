@@ -18,4 +18,13 @@ public class ProductCreateReqDto {
 
     @Positive(message = "상품 가격은 양수여야 합나다.")
     private int price;
+
+    public ProductDto toProductDto() {
+        return ProductDto.builder()
+                .categoryCode(categoryCode)
+                .status(status)
+                .name(productName)
+                .price(price)
+                .build();
+    }
 }

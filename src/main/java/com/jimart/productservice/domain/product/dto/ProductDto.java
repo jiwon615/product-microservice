@@ -2,9 +2,13 @@ package com.jimart.productservice.domain.product.dto;
 
 import com.jimart.productservice.domain.product.constant.ProductStatus;
 import com.jimart.productservice.domain.product.entity.Product;
+import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class ProductDto {
 
     private String categoryCode;
@@ -19,5 +23,13 @@ public class ProductDto {
                 .name(name)
                 .price(price)
                 .build();
+    }
+
+    @Builder
+    private ProductDto(String categoryCode, ProductStatus status, String name, int price) {
+        this.categoryCode = categoryCode;
+        this.status = status;
+        this.name = name;
+        this.price = price;
     }
 }
