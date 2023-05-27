@@ -5,6 +5,7 @@ import com.jimart.productservice.domain.product.constant.ProductStatus;
 import com.jimart.productservice.domain.stock.Stock;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -35,4 +36,12 @@ public class Product extends BaseEntity {
     @JoinColumn(name = "stock_id")
     private Stock stock;
 
+    @Builder
+    private Product(String categoryCode, ProductStatus status, String name, int price, Stock stock) {
+        this.categoryCode = categoryCode;
+        this.status = status;
+        this.name = name;
+        this.price = price;
+        this.stock = stock;
+    }
 }

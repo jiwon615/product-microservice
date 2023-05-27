@@ -10,12 +10,11 @@ import java.util.List;
 public enum ProductStatus {
     SELLING("판매중"),
     SOLD_OUT("품절"),
-    HOLD("재입고 예정으로 인한 판매 보류"),
     STOP_SELLING("판매 중단");
 
     private final String text;
 
     public static List<ProductStatus> forDisplay() {
-        return List.of(SELLING, HOLD);
+        return List.of(SELLING, SOLD_OUT);
     }
 }
