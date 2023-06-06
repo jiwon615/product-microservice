@@ -24,12 +24,16 @@ public class ProductCreateReqDto {
     @Positive(message = "상품 가격은 양수여야 합나다.")
     private int price;
 
+    @Positive(message = "재고 수량은 양수여야 합나다.")
+    private int quantity;
+
     public ProductDto toProductDto() {
         return ProductDto.builder()
                 .categoryCode(categoryCode)
                 .status(status)
                 .name(productName)
                 .price(price)
+                .quantity(quantity)
                 .build();
     }
 }

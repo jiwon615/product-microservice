@@ -1,5 +1,6 @@
 package com.jimart.productservice.domain.product.service;
 
+import com.jimart.productservice.core.exception.CustomException;
 import com.jimart.productservice.domain.product.constant.ProductStatus;
 import com.jimart.productservice.domain.product.dto.ProductDto;
 import com.jimart.productservice.domain.product.dto.ProductResDto;
@@ -12,6 +13,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+
+import static com.jimart.productservice.core.exception.ErrorMsgType.PRD_NOT_FOUND;
 
 @Transactional
 @Service
@@ -27,6 +30,13 @@ public class ProductServiceImpl implements ProductService{
         return products.stream()
                 .map(ProductResDto::of)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public ProductResDto getProductById(Long id) {
+        Product product = productRepository.findById(id)
+                .orElseThrow(() -> new CustomException(PRD_NOT_FOUND));
+        return ProductResDto.of(product);
     }
 
     @Transactional(readOnly = true)

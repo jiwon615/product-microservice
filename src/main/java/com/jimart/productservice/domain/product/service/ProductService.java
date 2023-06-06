@@ -10,6 +10,9 @@ public interface ProductService {
     // 전체 상품 목록 조회
     List<ProductResDto> getAllProducts();
 
+    // id로 상품 조회
+    ProductResDto getProductById(Long id);
+
     // display 되는 상품 목록 조회
     List<ProductResDto> getProductsForDisplay();
 

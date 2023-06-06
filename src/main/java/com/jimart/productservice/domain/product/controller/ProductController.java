@@ -23,6 +23,11 @@ public class ProductController {
         return ApiResponse.ok(productService.getAllProducts());
     }
 
+    @GetMapping("{id}")
+    public ApiResponse<ProductResDto> getProductById(@PathVariable(name = "id") Long id) {
+        return ApiResponse.ok(productService.getProductById(id));
+    }
+
     @GetMapping("display")
     public ApiResponse<List<ProductResDto>> getProductsForDisplay() {
         return ApiResponse.ok(productService.getProductsForDisplay());

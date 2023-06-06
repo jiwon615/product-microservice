@@ -15,6 +15,7 @@ public class ProductDto {
     private ProductStatus status;
     private String name;
     private int price;
+    private int quantity;
 
     public Product toEntity() {
         return Product.builder()
@@ -22,14 +23,16 @@ public class ProductDto {
                 .status(status)
                 .name(name)
                 .price(price)
+                .quantity(quantity)
                 .build();
     }
 
     @Builder
-    private ProductDto(String categoryCode, ProductStatus status, String name, int price) {
+    private ProductDto(String categoryCode, ProductStatus status, String name, int price, int quantity) {
         this.categoryCode = categoryCode;
         this.status = status;
         this.name = name;
         this.price = price;
+        this.quantity = quantity;
     }
 }

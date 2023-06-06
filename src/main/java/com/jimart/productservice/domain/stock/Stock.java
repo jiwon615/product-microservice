@@ -3,6 +3,7 @@ package com.jimart.productservice.domain.stock;
 import com.jimart.productservice.domain.common.BaseEntity;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -20,4 +21,10 @@ public class Stock extends BaseEntity {
     private String productCd;
 
     private int quantity;
+
+    @Builder
+    private Stock(String productCd, int quantity) {
+        this.productCd = productCd;
+        this.quantity = quantity;
+    }
 }

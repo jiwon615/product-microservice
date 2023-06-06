@@ -1,13 +1,12 @@
 package com.jimart.productservice.domain.product.entity;
 
+import com.jimart.productservice.core.exception.CustomException;
 import com.jimart.productservice.domain.common.BaseEntity;
 import com.jimart.productservice.domain.product.constant.ProductStatus;
-import com.jimart.productservice.domain.stock.Stock;
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
+
+import static com.jimart.productservice.core.exception.ErrorMsgType.STOCK_NOT_ENOUGH;
 
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -20,7 +19,7 @@ public class Product extends BaseEntity {
     @Column(name = "product_id")
     private Long id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String categoryCode;
 
     @Column(nullable = false)
@@ -32,16 +31,26 @@ public class Product extends BaseEntity {
 
     private int price;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "stock_id")
-    private Stock stock;
+    @Setter
+    private int quantity;
 
     @Builder
-    private Product(String categoryCode, ProductStatus status, String name, int price, Stock stock) {
+    private Product(String categoryCode, ProductStatus status, String name, int price, int quantity) {
         this.categoryCode = categoryCode;
         this.status = status;
         this.name = name;
         this.price = price;
-        this.stock = stock;
+        this.quantity = quantity;
+    }
+
+    public boolean isStockQuantityLessThan(int reqQuantity) {
+        return quantity < reqQuantity;
+    }
+
+    public void deductQuantity(int reqQuantity) {
+        if (isStockQuantityLessThan(reqQuantity)) {
+            throw new CustomException(STOCK_NOT_ENOUGH);
+        }
+        this.quantity -= reqQuantity;
     }
 }
