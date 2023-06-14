@@ -1,0 +1,20 @@
+spring:
+  cloud:
+    config:
+      uri: http://config-service:8888
+      name: jimart-dev
+    rabbitmq:
+      host: rabbitmq
+      port: 5672
+      username: guest
+      password: guest
+eureka:
+  instance:
+    client:
+      service-url:
+        defaultZone: http://jimart-eureka-service:8761/eureka
+logging:
+  file: /api-logs/products-ws.log
+custom-define:
+  url:
+    bootstrap-servers-config: 172.18.0.101:9092

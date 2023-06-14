@@ -1,6 +1,7 @@
 package com.jimart.productservice.core.messagequeue;
 
 import org.apache.kafka.common.serialization.StringDeserializer;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.annotation.EnableKafka;
@@ -17,11 +18,14 @@ import static org.apache.kafka.clients.consumer.ConsumerConfig.*;
 @Configuration
 public class KafkaConfig {
 
+    @Value("${custom-define.url.bootstrap-servers-config}")
+    private String kafkaUrl;
+
     // 접속 정보 등록
     @Bean
     public ConsumerFactory<String, String> consumerFactory() {
         Map<String, Object> properties = new HashMap<>();
-        properties.put(BOOTSTRAP_SERVERS_CONFIG, "127.0.0.1:9092");
+        properties.put(BOOTSTRAP_SERVERS_CONFIG, kafkaUrl);
         properties.put(GROUP_ID_CONFIG, "consumerGroupId");
         properties.put(KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         properties.put(VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
