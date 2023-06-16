@@ -1,4 +1,7 @@
 spring:
+  config:
+    activate:
+      on-profile: dev
   cloud:
     config:
       uri: http://config-service:8888

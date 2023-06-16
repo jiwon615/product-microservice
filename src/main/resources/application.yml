@@ -5,11 +5,16 @@ spring:
   application:
     name: product-service
 
-  datasource:
-    url: jdbc:h2:mem:~/jimartdb
-    driver-class-name: org.h2.Driver
-    username: sa
-    password:
+  cloud:
+    config:
+      uri: http://127.0.0.1:8888
+      name: order-service
+
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: guest
+    password: guest
 
   jpa:
     hibernate:
