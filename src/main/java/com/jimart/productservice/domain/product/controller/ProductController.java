@@ -38,8 +38,8 @@ public class ProductController {
         return ApiResponse.created(productService.saveProduct(request.toProductDto()));
     }
 
-    @PutMapping("")
-    public ApiResponse<Void> updateProduct(@RequestBody ProductUpdateReqDto request) {
+    @PutMapping("{productId}")
+    public ApiResponse<Void> updateProduct(@PathVariable(name = "productId") Long productId, @RequestBody ProductUpdateReqDto request) {
         productService.updateProduct(request.toProductDto());
         return ApiResponse.ok();
     }

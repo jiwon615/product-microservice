@@ -32,6 +32,7 @@ public class ProductServiceImpl implements ProductService{
                 .collect(Collectors.toList());
     }
 
+    @Transactional(readOnly = true)
     @Override
     public ProductResDto getProductById(Long id) {
         Product product = productRepository.findById(id)
@@ -57,7 +58,14 @@ public class ProductServiceImpl implements ProductService{
 
     @Override
     public void updateProduct(ProductDto request) {
-        // TODO: 구현
+        Product product = productRepository.findById(request.getId())
+                .orElseThrow(() -> new CustomException(PRD_NOT_FOUND));
+        product.setCategoryCode(request.getCategoryCode());
+        product.setStatus(request.getStatus());
+        product.setName(request.getName());
+        product.setPrice(request.getPrice());
+        product.setQuantity(request.getQuantity());
+        productRepository.save(product);
     }
 
     @Override

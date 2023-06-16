@@ -11,6 +11,7 @@ import static com.jimart.productservice.core.exception.ErrorMsgType.STOCK_NOT_EN
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
+@Setter
 @Table(name = "jimart_product")
 public class Product extends BaseEntity {
 
@@ -19,7 +20,7 @@ public class Product extends BaseEntity {
     @Column(name = "product_id")
     private Long id;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String categoryCode;
 
     @Column(nullable = false)
